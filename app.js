@@ -21,5 +21,34 @@ const menu = {
     },
     set desserts(dessert){
         return this._courses.desserts = dessert;
+    },
+    get courses(){
+        return {
+            appetizers: this.appetizers,
+            mains: this.mains,
+            desserts: this.desserts;
+        };
+    },
+    addDishToCourse(courseName,dishName,dishPrice){
+        const dish ={
+            name: dishName,
+            price: dishPrice,
+        };
+        return this._courses[courseName].push(dish);
+    },
+    getRandomDishFromCourse(courseName) {
+        const dishes = this._courses[courseName];
+        const randomIndex = Math.floor(Math.random() * dishes.length);
+        return dishes[randomIndex];
+    },
+    generateRandomMeal(){
+        const appetizers = this.getRandomDishFromCourse('appetizer');
+        const mains = this.getRandomDishFromCourse('mains');
+        const desserts = this.getRandomDishFromCourse('desserts')
+
+        const totalPrice = appetizers.price + mains.price + desserts.price;
+        return `Your meal is ${appetizer.name}, ${mains.name}, ${desserts.name}. The price is $${totalPrice}.`;
     }
 };
+
+
