@@ -1,56 +1,63 @@
 const menu = {
     _courses: {
-        appetizer:[],
-        mains:[],
-        desserts: []
+        _appetizers: [],
+        _mains: [],
+        _desserts: [],
+
+        get appetizers() {
+            return this._appetizers;
+        },
+        set appetizers(appetizersIn) {
+            this._appetizers = appetizersIn;
+        },
+        get mains() {
+            return this._mains;
+        },
+        set mains(mainsIn) {
+            this._mains = mainsIn;
+        },
+        get desserts() {
+            return this._desserts;
+        },
+        set desserts(dessertsIn) {
+            this._desserts = dessertsIn;
+        },
     },
-    get appetizers(){
-        return this._courses.appetizer;
-    },
-    get mains(){
-        return this._courses.mains;
-    },
-    get desserts(){
-        return this._courses.desserts;
-    },
-    set appetizers(appetizer){
-        return this._courses.appetizer = appetizer;
-    },
-    set mains(main){
-        return this._courses.mains = main;
-    },
-    set desserts(dessert){
-        return this._courses.desserts = dessert;
-    },
-    get courses(){
+
+    get courses() {
         return {
-            appetizers: this.appetizers,
-            mains: this.mains,
-            desserts: this.desserts,
+            appetizers: this._courses.appetizers,
+            mains: this._courses.mains,
+            desserts: this._courses.desserts,
         };
     },
-    addDishToCourse(courseName,dishName,dishPrice){
+
+    ///===============================================================
+
+    addDishToCourse (courseName, dishName, dishPrice) {
         const dish = {
             name: dishName,
             price: dishPrice,
         };
-        return this._courses[courseName].push(dish);
+
+        this._courses[courseName].push(dish);
     },
-    getRandomDishFromCourse(courseName) {
+
+    getRandomDishFromCourse (courseName) {
         const dishes = this._courses[courseName];
         const randomIndex = Math.floor(Math.random() * dishes.length);
         return dishes[randomIndex];
     },
-    generateRandomMeal(){
-        const appetizers = this.getRandomDishFromCourse('appetizer');
-        const mains = this.getRandomDishFromCourse('mains');
-        const desserts = this.getRandomDishFromCourse('desserts')
 
-        const totalPrice = appetizers.price + mains.price + desserts.price;
-        return `Your meal is ${appetizer.name}, ${mains.name}, ${desserts.name}. The price is $${totalPrice}.`;
-    }
+    generateRandomMeal() {
+        const appetizer = this.getRandomDishFromCourse('appetizers');
+        const main = this.getRandomDishFromCourse('mains');
+        const dessert = this.getRandomDishFromCourse('desserts');
+        const totalPrice = appetizer.price + main.price + dessert.price;
+
+        return `Your meal is ${appetizer.name}, ${main.name} and ${dessert.name}. The price is $${totalPrice.toFixed(2)}.`;
+    },
 };
-
 
 menu.addDishToCourse('appetizers', 'nachos', 2.00);
 menu.addDishToCourse('appetizers', 'tacos', 3.00);
