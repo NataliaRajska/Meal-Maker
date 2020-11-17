@@ -26,11 +26,11 @@ const menu = {
         return {
             appetizers: this.appetizers,
             mains: this.mains,
-            desserts: this.desserts;
+            desserts: this.desserts,
         };
     },
     addDishToCourse(courseName,dishName,dishPrice){
-        const dish ={
+        const dish = {
             name: dishName,
             price: dishPrice,
         };
@@ -52,3 +52,12 @@ const menu = {
 };
 
 
+menu.addDishToCourse('appetizers', 'nachos', 2.00);
+menu.addDishToCourse('appetizers', 'tacos', 3.00);
+menu.addDishToCourse('mains', 'steak', 10.00);
+menu.addDishToCourse('mains', 'vegetables', 8.00);
+menu.addDishToCourse('desserts', 'ice cream', 1.00);
+menu.addDishToCourse('desserts', 'cake', 5.00);
+
+const meal = menu.generateRandomMeal();
+console.log(meal)
